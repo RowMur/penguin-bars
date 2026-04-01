@@ -7,6 +7,8 @@ import { shops } from "@/lib/shops";
 
 export default function PenguinBarForm() {
   const [formData, setFormData] = useState({
+    contributorName: "",
+    contributorId: "",
     joke: "",
     fact: "",
     design: "",
@@ -56,6 +58,28 @@ export default function PenguinBarForm() {
       }
     };
     fetchSuggestions();
+  }, []);
+
+  useEffect(() => {
+    const existingId = window.localStorage.getItem("penguinContributorId");
+    const existingName = window.localStorage.getItem("penguinContributorName");
+    const contributorId =
+      existingId ||
+      (typeof crypto.randomUUID === "function"
+        ? `anon-${crypto.randomUUID()}`
+        : `anon-${Math.random().toString(36).slice(2)}${Date.now().toString(36)}`);
+
+    if (!existingId) {
+      window.localStorage.setItem("penguinContributorId", contributorId);
+    }
+
+    document.cookie = `penguinContributorId=${encodeURIComponent(contributorId)}; path=/; max-age=31536000; samesite=lax`;
+
+    setFormData((prev) => ({
+      ...prev,
+      contributorId,
+      contributorName: existingName ?? "",
+    }));
   }, []);
 
   useEffect(() => {
@@ -141,6 +165,11 @@ export default function PenguinBarForm() {
     >,
   ) => {
     const { name, value } = e.target;
+
+    if (name === "contributorName") {
+      window.localStorage.setItem("penguinContributorName", value);
+    }
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -226,6 +255,8 @@ export default function PenguinBarForm() {
         text: "Penguin bar logged successfully! 🐧",
       });
       setFormData({
+        contributorName: formData.contributorName,
+        contributorId: formData.contributorId,
         joke: "",
         fact: "",
         design: "",
@@ -260,6 +291,20 @@ export default function PenguinBarForm() {
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4 text-left">
+          <div>
+            <label className="mb-2 inline-block rounded px-3 py-1 text-sm font-bold text-black">
+              🏁 DISPLAY NAME (OPTIONAL)
+            </label>
+            <input
+              name="contributorName"
+              value={formData.contributorName}
+              onChange={handleChange}
+              placeholder="e.g. Penguin Pro"
+              className={fieldClassName}
+              maxLength={40}
+            />
+          </div>
+
           <div className="relative">
             <label className="mb-2 inline-block rounded px-3 py-1 text-sm font-bold text-black">
               😄 JOKE

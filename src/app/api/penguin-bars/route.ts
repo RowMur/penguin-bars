@@ -74,8 +74,29 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
-    const { joke, fact, design, county, shop, imageUrl, website } = body;
+    const {
+      joke,
+      fact,
+      design,
+      county,
+      shop,
+      imageUrl,
+      website,
+      contributorId,
+      contributorName,
+    } = body;
     const flavour = body.flavour ?? body.flavor;
+    const normalizedContributorName =
+      typeof contributorName === "string" ? contributorName.trim() : "";
+    const normalizedContributorId =
+      typeof contributorId === "string" ? contributorId.trim() : "";
+
+    const safeContributorId = normalizedContributorId
+      ? normalizedContributorId.slice(0, 64)
+      : `anon-${crypto.randomUUID()}`;
+    const safeContributorName = normalizedContributorName
+      ? normalizedContributorName.slice(0, 40)
+      : `Penguin Hunter #${safeContributorId.slice(-4).toUpperCase()}`;
 
     if (typeof website === "string" && website.trim().length > 0) {
       return NextResponse.json(
@@ -107,6 +128,8 @@ export async function POST(request: NextRequest) {
 
     const penguinBar = await prisma.penguinBar.create({
       data: {
+        contributorId: safeContributorId,
+        contributorName: safeContributorName,
         joke,
         fact: typeof fact === "string" ? fact : "",
         design: typeof design === "string" ? design : "",
@@ -119,7 +142,14 @@ export async function POST(request: NextRequest) {
 
     revalidatePath("/");
 
-    return NextResponse.json(penguinBar, { status: 201 });
+    return NextResponse.json(
+      {
+        ...penguinBar,
+        contributorId: safeContributorId,
+        contributorName: safeContributorName,
+      },
+      { status: 201 },
+    );
   } catch (error) {
     console.error("Error creating penguin bar:", error);
     return NextResponse.json(

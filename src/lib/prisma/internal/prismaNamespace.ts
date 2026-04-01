@@ -519,6 +519,8 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const PenguinBarScalarFieldEnum = {
   id: 'id',
+  contributorId: 'contributorId',
+  contributorName: 'contributorName',
   joke: 'joke',
   fact: 'fact',
   design: 'design',

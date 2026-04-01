@@ -26,6 +26,8 @@ export type AggregatePenguinBar = {
 
 export type PenguinBarMinAggregateOutputType = {
   id: string | null
+  contributorId: string | null
+  contributorName: string | null
   joke: string | null
   fact: string | null
   design: string | null
@@ -39,6 +41,8 @@ export type PenguinBarMinAggregateOutputType = {
 
 export type PenguinBarMaxAggregateOutputType = {
   id: string | null
+  contributorId: string | null
+  contributorName: string | null
   joke: string | null
   fact: string | null
   design: string | null
@@ -52,6 +56,8 @@ export type PenguinBarMaxAggregateOutputType = {
 
 export type PenguinBarCountAggregateOutputType = {
   id: number
+  contributorId: number
+  contributorName: number
   joke: number
   fact: number
   design: number
@@ -67,6 +73,8 @@ export type PenguinBarCountAggregateOutputType = {
 
 export type PenguinBarMinAggregateInputType = {
   id?: true
+  contributorId?: true
+  contributorName?: true
   joke?: true
   fact?: true
   design?: true
@@ -80,6 +88,8 @@ export type PenguinBarMinAggregateInputType = {
 
 export type PenguinBarMaxAggregateInputType = {
   id?: true
+  contributorId?: true
+  contributorName?: true
   joke?: true
   fact?: true
   design?: true
@@ -93,6 +103,8 @@ export type PenguinBarMaxAggregateInputType = {
 
 export type PenguinBarCountAggregateInputType = {
   id?: true
+  contributorId?: true
+  contributorName?: true
   joke?: true
   fact?: true
   design?: true
@@ -179,6 +191,8 @@ export type PenguinBarGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 
 export type PenguinBarGroupByOutputType = {
   id: string
+  contributorId: string | null
+  contributorName: string | null
   joke: string
   fact: string
   design: string
@@ -213,6 +227,8 @@ export type PenguinBarWhereInput = {
   OR?: Prisma.PenguinBarWhereInput[]
   NOT?: Prisma.PenguinBarWhereInput | Prisma.PenguinBarWhereInput[]
   id?: Prisma.StringFilter<"PenguinBar"> | string
+  contributorId?: Prisma.StringNullableFilter<"PenguinBar"> | string | null
+  contributorName?: Prisma.StringNullableFilter<"PenguinBar"> | string | null
   joke?: Prisma.StringFilter<"PenguinBar"> | string
   fact?: Prisma.StringFilter<"PenguinBar"> | string
   design?: Prisma.StringFilter<"PenguinBar"> | string
@@ -226,6 +242,8 @@ export type PenguinBarWhereInput = {
 
 export type PenguinBarOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  contributorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  contributorName?: Prisma.SortOrderInput | Prisma.SortOrder
   joke?: Prisma.SortOrder
   fact?: Prisma.SortOrder
   design?: Prisma.SortOrder
@@ -242,6 +260,8 @@ export type PenguinBarWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.PenguinBarWhereInput | Prisma.PenguinBarWhereInput[]
   OR?: Prisma.PenguinBarWhereInput[]
   NOT?: Prisma.PenguinBarWhereInput | Prisma.PenguinBarWhereInput[]
+  contributorId?: Prisma.StringNullableFilter<"PenguinBar"> | string | null
+  contributorName?: Prisma.StringNullableFilter<"PenguinBar"> | string | null
   joke?: Prisma.StringFilter<"PenguinBar"> | string
   fact?: Prisma.StringFilter<"PenguinBar"> | string
   design?: Prisma.StringFilter<"PenguinBar"> | string
@@ -255,6 +275,8 @@ export type PenguinBarWhereUniqueInput = Prisma.AtLeast<{
 
 export type PenguinBarOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  contributorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  contributorName?: Prisma.SortOrderInput | Prisma.SortOrder
   joke?: Prisma.SortOrder
   fact?: Prisma.SortOrder
   design?: Prisma.SortOrder
@@ -274,6 +296,8 @@ export type PenguinBarScalarWhereWithAggregatesInput = {
   OR?: Prisma.PenguinBarScalarWhereWithAggregatesInput[]
   NOT?: Prisma.PenguinBarScalarWhereWithAggregatesInput | Prisma.PenguinBarScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PenguinBar"> | string
+  contributorId?: Prisma.StringNullableWithAggregatesFilter<"PenguinBar"> | string | null
+  contributorName?: Prisma.StringNullableWithAggregatesFilter<"PenguinBar"> | string | null
   joke?: Prisma.StringWithAggregatesFilter<"PenguinBar"> | string
   fact?: Prisma.StringWithAggregatesFilter<"PenguinBar"> | string
   design?: Prisma.StringWithAggregatesFilter<"PenguinBar"> | string
@@ -287,6 +311,8 @@ export type PenguinBarScalarWhereWithAggregatesInput = {
 
 export type PenguinBarCreateInput = {
   id?: string
+  contributorId?: string | null
+  contributorName?: string | null
   joke: string
   fact: string
   design: string
@@ -300,6 +326,8 @@ export type PenguinBarCreateInput = {
 
 export type PenguinBarUncheckedCreateInput = {
   id?: string
+  contributorId?: string | null
+  contributorName?: string | null
   joke: string
   fact: string
   design: string
@@ -313,6 +341,8 @@ export type PenguinBarUncheckedCreateInput = {
 
 export type PenguinBarUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contributorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contributorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   joke?: Prisma.StringFieldUpdateOperationsInput | string
   fact?: Prisma.StringFieldUpdateOperationsInput | string
   design?: Prisma.StringFieldUpdateOperationsInput | string
@@ -326,6 +356,8 @@ export type PenguinBarUpdateInput = {
 
 export type PenguinBarUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contributorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contributorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   joke?: Prisma.StringFieldUpdateOperationsInput | string
   fact?: Prisma.StringFieldUpdateOperationsInput | string
   design?: Prisma.StringFieldUpdateOperationsInput | string
@@ -339,6 +371,8 @@ export type PenguinBarUncheckedUpdateInput = {
 
 export type PenguinBarCreateManyInput = {
   id?: string
+  contributorId?: string | null
+  contributorName?: string | null
   joke: string
   fact: string
   design: string
@@ -352,6 +386,8 @@ export type PenguinBarCreateManyInput = {
 
 export type PenguinBarUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contributorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contributorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   joke?: Prisma.StringFieldUpdateOperationsInput | string
   fact?: Prisma.StringFieldUpdateOperationsInput | string
   design?: Prisma.StringFieldUpdateOperationsInput | string
@@ -365,6 +401,8 @@ export type PenguinBarUpdateManyMutationInput = {
 
 export type PenguinBarUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contributorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contributorName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   joke?: Prisma.StringFieldUpdateOperationsInput | string
   fact?: Prisma.StringFieldUpdateOperationsInput | string
   design?: Prisma.StringFieldUpdateOperationsInput | string
@@ -378,6 +416,8 @@ export type PenguinBarUncheckedUpdateManyInput = {
 
 export type PenguinBarCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  contributorId?: Prisma.SortOrder
+  contributorName?: Prisma.SortOrder
   joke?: Prisma.SortOrder
   fact?: Prisma.SortOrder
   design?: Prisma.SortOrder
@@ -391,6 +431,8 @@ export type PenguinBarCountOrderByAggregateInput = {
 
 export type PenguinBarMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  contributorId?: Prisma.SortOrder
+  contributorName?: Prisma.SortOrder
   joke?: Prisma.SortOrder
   fact?: Prisma.SortOrder
   design?: Prisma.SortOrder
@@ -404,6 +446,8 @@ export type PenguinBarMaxOrderByAggregateInput = {
 
 export type PenguinBarMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  contributorId?: Prisma.SortOrder
+  contributorName?: Prisma.SortOrder
   joke?: Prisma.SortOrder
   fact?: Prisma.SortOrder
   design?: Prisma.SortOrder
@@ -431,6 +475,8 @@ export type DateTimeFieldUpdateOperationsInput = {
 
 export type PenguinBarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  contributorId?: boolean
+  contributorName?: boolean
   joke?: boolean
   fact?: boolean
   design?: boolean
@@ -444,6 +490,8 @@ export type PenguinBarSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type PenguinBarSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  contributorId?: boolean
+  contributorName?: boolean
   joke?: boolean
   fact?: boolean
   design?: boolean
@@ -457,6 +505,8 @@ export type PenguinBarSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
 
 export type PenguinBarSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  contributorId?: boolean
+  contributorName?: boolean
   joke?: boolean
   fact?: boolean
   design?: boolean
@@ -470,6 +520,8 @@ export type PenguinBarSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 
 export type PenguinBarSelectScalar = {
   id?: boolean
+  contributorId?: boolean
+  contributorName?: boolean
   joke?: boolean
   fact?: boolean
   design?: boolean
@@ -481,13 +533,15 @@ export type PenguinBarSelectScalar = {
   updatedAt?: boolean
 }
 
-export type PenguinBarOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "joke" | "fact" | "design" | "flavour" | "county" | "shop" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["penguinBar"]>
+export type PenguinBarOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contributorId" | "contributorName" | "joke" | "fact" | "design" | "flavour" | "county" | "shop" | "imageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["penguinBar"]>
 
 export type $PenguinBarPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PenguinBar"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    contributorId: string | null
+    contributorName: string | null
     joke: string
     fact: string
     design: string
@@ -921,6 +975,8 @@ export interface Prisma__PenguinBarClient<T, Null = never, ExtArgs extends runti
  */
 export interface PenguinBarFieldRefs {
   readonly id: Prisma.FieldRef<"PenguinBar", 'String'>
+  readonly contributorId: Prisma.FieldRef<"PenguinBar", 'String'>
+  readonly contributorName: Prisma.FieldRef<"PenguinBar", 'String'>
   readonly joke: Prisma.FieldRef<"PenguinBar", 'String'>
   readonly fact: Prisma.FieldRef<"PenguinBar", 'String'>
   readonly design: Prisma.FieldRef<"PenguinBar", 'String'>

@@ -12,6 +12,8 @@ datasource db {
 
 model PenguinBar {
   id        String   @id @default(cuid())
+  contributorId   String?
+  contributorName String?
   joke      String
   fact      String
   design    String
