@@ -17,19 +17,19 @@ export default async function Home() {
       <div className="relative z-10 w-fit container mx-auto px-4 py-12 text-center">
         {/* Header section with yellow background */}
         <div className="mb-12 rounded-2xl border-4 border-[#0B4AA7] bg-[#FFD60A] p-12 shadow-2xl">
-          <div className="flex text-xl md:text-6xl justify-center items-center">
-            <span>🐧</span>
-            <h1 className="mb-4  font-black tracking-tight text-black">
+          <div className="flex text-xl md:text-6xl justify-center items-center mb-4">
+            <span className="pr-2">🐧</span>
+            <h1 className="font-black tracking-tight text-black">
               PENGUIN BARS DATABASE
             </h1>
-            <span>🐧</span>
+            <span className="pl-2">🐧</span>
           </div>
           <div className="mb-6 h-2 w-32 rounded-full bg-[#0B4AA7] mx-auto"></div>
           <p className="max-w-2xl mx-auto text-md md:text-xl font-bold text-black">
             Help us collect data on penguin bars jokes, facts, and designs from
             around the UK!
           </p>
-          <div className="mt-8 flex flex-col md:flex-row gap-8 justify-center">
+          <div className="mt-8 flex flex-wrap gap-8 justify-center">
             <div className="flex flex-col items-center">
               <p className="text-sm font-semibold text-[#0B4AA7]">
                 BARS COLLECTED
