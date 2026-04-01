@@ -34,3 +34,21 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+### Production Database Setup (Prisma + Supabase)
+
+This project uses Prisma migrations during deployment.
+
+1. In Vercel project settings, add environment variables:
+   - `DATABASE_URL` (pooled runtime connection)
+   - `DIRECT_URL` (direct connection for migrations)
+2. Set the Vercel Build Command to:
+   - `pnpm vercel-build`
+
+The `vercel-build` script runs:
+
+1. `prisma generate`
+2. `prisma migrate deploy`
+3. `next build`
+
+Use `.env.example` as the template for required variables.

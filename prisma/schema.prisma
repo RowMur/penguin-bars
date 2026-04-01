@@ -1,0 +1,24 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/lib/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model PenguinBar {
+  id        String   @id @default(cuid())
+  joke      String
+  fact      String
+  design    String
+  flavour   String
+  county    String
+  shop      String
+  imageUrl  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
