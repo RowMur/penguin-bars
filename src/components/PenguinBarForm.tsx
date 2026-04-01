@@ -1,15 +1,19 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { counties } from "@/lib/counties";
+import { flavours } from "@/lib/flavours";
+import { shops } from "@/lib/shops";
 
 export default function PenguinBarForm() {
   const [formData, setFormData] = useState({
     joke: "",
     fact: "",
     design: "",
-    flavor: "",
+    flavour: "",
     county: "",
     shop: "",
+    website: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -35,8 +39,34 @@ export default function PenguinBarForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
     setMessage(null);
+
+    const selectedCounty = formData.county.trim();
+    if (!counties.includes(selectedCounty)) {
+      setMessage({
+        type: "error",
+        text: "Please select a valid county from the list.",
+      });
+      return;
+    }
+
+    if (!shops.includes(formData.shop as (typeof shops)[number])) {
+      setMessage({
+        type: "error",
+        text: "Please select a valid shop from the dropdown.",
+      });
+      return;
+    }
+
+    if (!flavours.includes(formData.flavour as (typeof flavours)[number])) {
+      setMessage({
+        type: "error",
+        text: "Please select a valid flavour from the dropdown.",
+      });
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const response = await fetch("/api/penguin-bars", {
@@ -59,9 +89,10 @@ export default function PenguinBarForm() {
         joke: "",
         fact: "",
         design: "",
-        flavor: "",
+        flavour: "",
         county: "",
         shop: "",
+        website: "",
       });
     } catch {
       setMessage({
@@ -75,15 +106,15 @@ export default function PenguinBarForm() {
 
   return (
     <div className="w-full max-w-2xl mx-auto p-0">
-      <div className="rounded-2xl border-4 border-[#0B4AA7] bg-linear-to-b from-[#FFD60A] to-white p-8 shadow-2xl">
-        <h2 className="mb-2 text-3xl font-black tracking-tight text-black">
-          🐧 LOG YOUR BAR
+      <div className="rounded-2xl border-4 border-[#0B4AA7] bg-[#FFD60A] p-8 shadow-2xl">
+        <h2 className="mb-2 text-xl md:text-3xl font-black tracking-tight text-black">
+          LOG YOUR BAR
         </h2>
         <p className="mb-6 font-bold text-[#0B4AA7]">
           Share your findings with us!
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 text-left">
           <div>
             <label className="mb-2 inline-block rounded px-3 py-1 text-sm font-bold text-black">
               😄 JOKE
@@ -95,12 +126,13 @@ export default function PenguinBarForm() {
               placeholder="What's the joke on this pack?"
               className={fieldClassName}
               rows={2}
+              required
             />
           </div>
 
           <div>
             <label className="mb-2 inline-block rounded px-3 py-1 text-sm font-bold text-black">
-              🧠 FACT
+              🧠 FACT (OPTIONAL)
             </label>
             <textarea
               name="fact"
@@ -114,7 +146,7 @@ export default function PenguinBarForm() {
 
           <div>
             <label className="mb-2 inline-block rounded px-3 py-1 text-sm font-bold text-black">
-              🐧 DESIGN
+              🐧 DESIGN (OPTIONAL)
             </label>
             <textarea
               name="design"
@@ -128,16 +160,24 @@ export default function PenguinBarForm() {
 
           <div>
             <label className="mb-2 inline-block rounded px-3 py-1 text-sm font-bold text-black">
-              🍫 FLAVOR
+              🍫 FLAVOUR
             </label>
-            <input
-              type="text"
-              name="flavor"
-              value={formData.flavor}
+            <select
+              name="flavour"
+              value={formData.flavour}
               onChange={handleChange}
-              placeholder="e.g., Original, Chocolate, Salted Caramel"
               className={fieldClassName}
-            />
+              required
+            >
+              <option value="" disabled>
+                Select a flavour
+              </option>
+              {flavours.map((flavour) => (
+                <option key={flavour} value={flavour}>
+                  {flavour}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div>
@@ -146,26 +186,41 @@ export default function PenguinBarForm() {
             </label>
             <input
               type="text"
+              list="county-options"
               name="county"
               value={formData.county}
               onChange={handleChange}
-              placeholder="e.g., London, Yorkshire, Cornwall"
+              placeholder="Start typing and choose a county"
               className={fieldClassName}
+              required
             />
+            <datalist id="county-options">
+              {counties.map((county) => (
+                <option key={county} value={county} />
+              ))}
+            </datalist>
           </div>
 
           <div>
             <label className="mb-2 inline-block rounded px-3 py-1 text-sm font-bold text-black">
               🏪 SHOP
             </label>
-            <input
-              type="text"
+            <select
               name="shop"
               value={formData.shop}
               onChange={handleChange}
-              placeholder="e.g., Tesco, Sainsbury's, Corner Shop"
               className={fieldClassName}
-            />
+              required
+            >
+              <option value="" disabled>
+                Select a shop
+              </option>
+              {shops.map((shop) => (
+                <option key={shop} value={shop}>
+                  {shop}
+                </option>
+              ))}
+            </select>
           </div>
 
           <button
@@ -175,6 +230,20 @@ export default function PenguinBarForm() {
           >
             {loading ? "SUBMITTING..." : "🐧 SUBMIT YOUR BAR 🐧"}
           </button>
+
+          {/* Honeypot field to trap bots; real users never see/fill this. */}
+          <div className="hidden" aria-hidden="true">
+            <label htmlFor="website">Website</label>
+            <input
+              id="website"
+              name="website"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={formData.website}
+              onChange={handleChange}
+            />
+          </div>
         </form>
 
         {message && (
