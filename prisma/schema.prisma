@@ -11,16 +11,16 @@ datasource db {
 }
 
 model PenguinBar {
-  id        String   @id @default(cuid())
+  id              String   @id @default(cuid())
   contributorId   String?
   contributorName String?
-  joke      String
-  fact      String
-  design    String
-  flavour   String
-  county    String
-  shop      String
-  imageUrl  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  joke            String
+  fact            String
+  design          String
+  flavour         String
+  county          String
+  shop            String
+  imageUrl        String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
