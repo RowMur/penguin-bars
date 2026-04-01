@@ -2,6 +2,7 @@ import { flavours } from "@/lib/flavours";
 import { prisma } from "@/lib/db";
 import { shops } from "@/lib/shops";
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
@@ -115,6 +116,8 @@ export async function POST(request: NextRequest) {
         imageUrl: imageUrl || null,
       },
     });
+
+    revalidatePath("/");
 
     return NextResponse.json(penguinBar, { status: 201 });
   } catch (error) {

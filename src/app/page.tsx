@@ -1,6 +1,13 @@
 import PenguinBarForm from "@/components/PenguinBarForm";
+import { prisma } from "@/lib/db";
 
-export default function Home() {
+export default async function Home() {
+  const totalBars = await prisma.penguinBar.count();
+  const uniqueJokes = await prisma.penguinBar.findMany({
+    select: { joke: true },
+    distinct: ["joke"],
+  });
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#E4252C]">
       {/* Yellow stripe accent */}
@@ -22,6 +29,25 @@ export default function Home() {
             Help us collect data on penguin bars jokes, facts, and designs from
             around the UK!
           </p>
+          <div className="mt-8 flex flex-col md:flex-row gap-8 justify-center">
+            <div className="flex flex-col items-center">
+              <p className="text-sm font-semibold text-[#0B4AA7]">
+                BARS COLLECTED
+              </p>
+              <p className="text-3xl md:text-4xl font-black text-black">
+                {totalBars}
+              </p>
+            </div>
+            <div className="hidden md:block w-1 bg-[#0B4AA7]"></div>
+            <div className="flex flex-col items-center">
+              <p className="text-sm font-semibold text-[#0B4AA7]">
+                UNIQUE JOKES
+              </p>
+              <p className="text-3xl md:text-4xl font-black text-black">
+                {uniqueJokes.length}
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="mb-12">

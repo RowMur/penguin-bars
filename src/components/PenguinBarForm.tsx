@@ -10,7 +10,7 @@ export default function PenguinBarForm() {
     joke: "",
     fact: "",
     design: "",
-    flavour: "",
+    flavour: "Original",
     county: "",
     shop: "",
     website: "",
@@ -94,6 +94,11 @@ export default function PenguinBarForm() {
         shop: "",
         website: "",
       });
+
+      // Refresh the page after 1.5 seconds to show updated stats
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     } catch {
       setMessage({
         type: "error",
